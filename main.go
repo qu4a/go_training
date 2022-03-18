@@ -3,7 +3,11 @@ package main
 import "fmt"
 
 func main() {
-	for x := 1; x <= 3; x++ {
-		fmt.Print(x)
+	testFunc("hello", 5)
+}
+
+func testFunc(word string, a int) {
+	for i := 0; i < a; i++ {
+		fmt.Println(word)
 	}
 }
