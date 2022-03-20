@@ -2,12 +2,12 @@ package main
 
 import "fmt"
 
-func main() {
-	testFunc("hello", 5)
+func double(number float64) float64 {
+	return number * 2
 }
 
-func testFunc(word string, a int) {
-	for i := 0; i < a; i++ {
-		fmt.Println(word)
-	}
+func main() {
+	fmt.Println(double(4))
+	tst := double(7)
+	fmt.Println(tst)
 }
