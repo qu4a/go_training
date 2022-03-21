@@ -21,4 +21,11 @@ func main() {
 	fmt.Println(&myBool)
 	myBoolPointer := &myBool
 	fmt.Println(myBoolPointer)
+
+	myInt := 4
+	fmt.Println(myInt)
+	myIntPointer := &myInt
+	*myIntPointer = 8          //новое значение присваевается пересменной на которую ссылается указатель myInt
+	fmt.Println(*myIntPointer) // выводится значение пересенной на которую ссылается указатель
+	fmt.Println(myInt)         //значение переменной на которое ссылается указатель
 }
