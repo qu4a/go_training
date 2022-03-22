@@ -9,9 +9,11 @@ func creatPoint() *float64 { //бъявляем, что функция возв�
 
 func main() {
 	var myFloatPointer *float64 = creatPoint() // возращает указатель в переменную
-
 	fmt.Println(*myFloatPointer)
-	fmt.Print(&myFloatPointer)
+	//fmt.Print(&myFloatPointer)
+
+	test := myFloatPointer
+	fmt.Println(&test)
 
 	var myInt int = 42
 	myIntPointer := &myInt
