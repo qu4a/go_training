@@ -1,12 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 func main() {
-	var sum float64 = 0.0
-	number := [3]float64{2.54, 3.56, 4.09}
+	numbers, err := datafile.getFloats("data.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
 	for _, value := range number { //перебор всех чисел в массиве
 		sum += value
+
 	}
 	fmt.Printf("Sum is %0.1f\n", sum)
 
