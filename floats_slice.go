@@ -8,20 +8,20 @@ import (
 )
 
 // getFloats читает значение float64 из каждой строки файла
-func getFloats(fileName string) ([3]float64, error) {
-	var numbers [3]float64         //объявляем возвращаемый массив
-	file, err := os.Open(fileName) //открываем файл с переданным именем
+func getFloats(fileName string) ([]float64, error) {
+	var numbers []float64
+	file, err := os.Open(fileName)
 	if err != nil {
 		return numbers, err
 	}
 	i := 0 //переменная для индексирования массива
 	sca := bufio.NewScanner(file)
 	for sca.Scan() {
-		numbers[i], err = strconv.ParseFloat(sca.Text(), 64) //строка прочитанная из файла преобразуется в float64
+		number, err = strconv.ParseFloat(sca.Text(), 64) //строка прочитанная из файла преобразуется в float64
 		if err != nil {
 			return numbers, err
 		}
-		i++ // переход к следующему индексу массива
+		numbers = append(numbers, number)
 
 		if sca.Err() != nil {
 			return numbers, sca.Err()
