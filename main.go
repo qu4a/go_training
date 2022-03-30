@@ -2,9 +2,15 @@ package main
 
 import "fmt"
 
+func average(numbers ...float64) float64 {
+	var sum float64 = 0
+	for _, number := range numbers {
+		sum += number
+	}
+	return sum / float64(len(numbers))
+}
+
 func main() {
-	slice := []string{"a", "c", "d"}
-	fmt.Println(slice, len((slice)))
-	slice = append(slice, "e")
-	fmt.Println(slice, len((slice)))
+	fmt.Println(average(7, 9))
+
 }
