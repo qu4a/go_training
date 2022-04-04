@@ -1,21 +1,21 @@
 package main
 
 import (
+	"datafile"
 	"fmt"
 	"log"
 )
 
 func main() {
-	numbers, err := datafile.getFloats("data.txt")
+	lines, err := datafile.GetStrings("data.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, value := range number { //перебор всех чисел в массиве
-		sum += value
-
+	counts := make(map[string]int) //создаем карту с участниками голосования имена и счетсчик голосов
+	for _, line := range lines {   //включаем счетчик вхождений
+		counts[line]++
 	}
-	fmt.Printf("Sum is %0.1f\n", sum)
-
-	count := float64(len((number))) //получить значение длины массивы в int и переобразовать в значение float
-	fmt.Printf("Average is %0.1f\n", sum/count)
+	for name, count := range counts { //цикл для мапы с выводом
+		fmt.Printf("Votes for %s: %d\n", name, count)
+	}
 }
