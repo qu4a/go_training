@@ -2,14 +2,20 @@ package main
 
 import "fmt"
 
-type Number int
+type Liters float64
+type Milliliters float64
 
-func (n *Number) Double() {
-	*n *= 2
+//type Gallons float64
+
+func (l Liters) ToMilliliters() Milliliters {
+	return Milliliters(l * 1000)
+}
+func (m Milliliters) ToLiters() Liters {
+	return Liters(m / 1000)
 }
 func main() {
-	number := Number(4)
-	fmt.Println("Original value of number:", number)
-	number.Double()
-	fmt.Println("number after calling Double:", number)
+	l := Liters(3)
+	fmt.Printf("%0.1f liters is %0.1f milliliters\n", l, l.ToMilliliters())
+	m1 := Milliliters(500)
+	fmt.Printf("%0.1f milliliters is %0.1f liters\n", m1, m1.ToLiters())
 }

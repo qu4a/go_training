@@ -2,13 +2,20 @@ package main
 
 import "fmt"
 
-type MyType string // определяется новый тип
+type Liters float64
+type Milliliters float64
+type Gallons float64
 
-func (m MyType) SayHi() { //m - параметр получателя, MyType-определяется метод
-	fmt.Println(m)
+func (l Liters) ToGallons() Gallons {
+	return Gallons(l * 0.264)
+}
+func (m Milliliters) ToGallons() Gallons {
+	return Gallons(m * 0.000264)
 }
 func main() {
-	value := MyType("a mytype value") //создаем значение MyType
-	value.SayHi()                     //Вызывем SayHi для этого значения
+	soda := Liters(2)
+	fmt.Printf("%0.3f liters equal %0.3f gallons\n", soda, soda.ToGallons())
+	water := Milliliters(500)
+	fmt.Printf("%0.3f milliliters equals %0.3f gallons\n", water, water.ToGallons())
 
 }
