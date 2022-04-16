@@ -7,15 +7,20 @@ import (
 )
 
 func main() {
-	coordinates := geo.Coordinates{}
-	err := coordinates.SetLatitude(20)
+	location := geo.Landmark{}
+	err := location.SetName("eqw")
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = coordinates.SetLongitude(-170)
+	err = location.SetLatitude(20)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(coordinates.Latitude())
-	fmt.Println(coordinates.Longitude())
+	err = location.SetLongitude(-170)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(location.Latitude())
+	fmt.Println(location.Longitude())
+	fmt.Println(location.Name())
 }
