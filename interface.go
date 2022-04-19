@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"gadget"
 )
 
@@ -15,6 +16,14 @@ func playList(device Play, songs []string) { //допустимо любое з�
 	}
 	device.Stop()
 }
+
+func TryOut(player Play) {
+	player.Play("TestTrack")
+	player.Stop()
+	recorder, ok := player.(gadget.TapeRecorder) //утверждение типа используется для перехода к значению TapeRecorder
+	if ok {
+		recorder.Record()
+	}
 
 func main() {
 	mixplay := []string{"Jessie's Girl", "Whip It", "9 to 5"}
