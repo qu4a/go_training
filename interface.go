@@ -23,7 +23,7 @@ func TryOut(player Play) {
 	recorder, ok := player.(gadget.TapeRecorder) //утверждение типа используется для перехода к значению TapeRecorder
 	if ok {
 		recorder.Record()
-	}
+	 }
 
 func main() {
 	mixplay := []string{"Jessie's Girl", "Whip It", "9 to 5"}
