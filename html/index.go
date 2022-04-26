@@ -5,11 +5,13 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 func main() {
-	responseSize("https://golang.org/")
-	responseSize("https://golang.org/doc")
+	go responseSize("https://golang.org/") //используем go команды для поддержание в программе параллелизма и конкурентности
+	go responseSize("https://golang.org/doc")
+	time.Sleep(5 * time.Second)
 }
 
 func responseSize(url string) {
