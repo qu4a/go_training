@@ -1,10 +1,10 @@
 <h1>GUESTBOOK</h1>
 <div>
-    X total signature - 
+    {{.SignatureCount}} total signature - <!--вставляем количество записей из структуры Guestbook  -->
     <a href="/guestbook/new">Add you signature</a>
 </div>
 <div>
-    <p>Signatures</p>
-    <p>go</p>
-    <p>here</p>
+    {{range .Signatures}} <!--Повторить для каждой строки  в сегменте Signatures. -->
+    <p>{{.}}</p>
+   {{end}}
 </div>

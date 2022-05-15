@@ -1,11 +1,33 @@
 package main
 
 import (
+	"bufio"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
 )
+
+type Guestbook struct { //объявляем новую структуру т.к. метод Execute принимает одно значение
+	SignatureCount int
+	Signatures     []string
+}
+
+func getStrings(filename string) []string { //функция для чтения из файла
+	var lines []string
+	file, err := os.Open(filename) //открываем файл
+	if os.IsNotExist(err) {        //если файл отсутствует, то вернуть ошибку вместо среза
+		return nil
+	}
+	check(err)         //в случае любой другой ошибке, сообщить об ней и завершить работу
+	defer file.Close() //полсе выхода из функции в любом случае закрыть файл
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	check(scanner.Err())
+	return lines
+}
 
 func check(err error) { //код сообщений об ошибках перемещается в эту функцию
 	if err != nil {
@@ -27,8 +49,16 @@ func viewHandler(writer http.ResponseWriter, request *http.Request) {
 	*/
 	html, err := template.ParseFiles("view.html") //сожержимое view.html используется для создания новго значения Template
 	check(err)
-	err = html.Execute(writer, nil) //содердимое шаблона записывается в ResponseWriter
+
+	signatures := getStrings("signatures.txt")
+	//fmt.Printf("%#v\n", signatures)
+	guestbook := Guestbook{ // новая структура Guestbook
+		SignatureCount: len(signatures),
+		Signatures:     signatures,
+	}
+	err = html.Execute(writer, guestbook) //содердимое шаблона записывается в ResponseWriter, а структура передается методу Execute значения Template
 	check(err)
+}
 
 func main() {
 	http.HandleFunc("/guesbook", viewHandler)
