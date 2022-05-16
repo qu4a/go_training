@@ -59,11 +59,23 @@ func viewHandler(writer http.ResponseWriter, request *http.Request) {
 	err = html.Execute(writer, guestbook) //содердимое шаблона записывается в ResponseWriter, а структура передается методу Execute значения Template
 	check(err)
 }
-
+func newHandler(writer http.ResponseWriter, request *http.Request) { //функция для /new
+	html, err := template.ParseFiles("new.html") //загружает содержимое /new как как текст шаблона
+	check(err)
+	err = html.Execute(writer, nil) //записать шаблон в ответ
+	check(err)
+}
+func createHandler(writer http.ResponseWriter, request *http.Request) {
+	signature := request.FormValue("signature") //получает значение поля формы signature
+	_, err := writer.Write([]byte(signature))   //записывает значение поля в ответ
+	check(err)
+}
 func main() {
-	http.HandleFunc("/guesbook", viewHandler)
+	http.HandleFunc("/guestbook", viewHandler)
+	http.HandleFunc("/guestbook/new", newHandler)
+	http.HandleFunc("/guestbook/create", createHandler) //обработчик запросов
 	err := http.ListenAndServe("localhost:8080", nil)
 	log.Fatal(err) //ошибка никогда не равно nil, по этому не вызываем check
-	executeTemplate("Dot is: {{.}}!\n", "ABC")
-	executeTemplate("Dot is: {{.}}!\n", 123.5)
+	//executeTemplate("Dot is: {{.}}!\n", "ABC")
+	//executeTemplate("Dot is: {{.}}!\n", 123.5)
 }
